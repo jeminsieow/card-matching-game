@@ -45,7 +45,7 @@ export default function Card({
       <CardContainer flipped={true} disabled={isDisabled}>
         <FlippedText>{card}</FlippedText>
       </CardContainer>
-    );
+    ) 
   } else if (isCleared) {
     return (
       <CardContainer flipped={true} disabled={true}>
@@ -54,7 +54,7 @@ export default function Card({
     );
   } else {
     return (
-      <CardContainer onPress={handlePress}>
+      <CardContainer onPress={handlePress} disabled={isDisabled}>
         <UnflippedText>?</UnflippedText>
       </CardContainer>
     );

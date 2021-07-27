@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect, useRef } from "react";
-import { TouchableOpacity, Alert } from "react-native";
+import { TouchableOpacity, Alert, FlatList } from "react-native";
 import styled from "styled-components/native";
 import { Card } from "./components";
 
@@ -12,6 +12,7 @@ const Container = styled.View`
 
 const Header = styled.View`
   padding-top: 50px;
+  padding-bottom: 5px;
   flex-direction: row;
   justify-content: space-between;
 `;
@@ -33,15 +34,6 @@ const StepsNumber = styled.Text`
   color: #1b98f2;
 `;
 
-const CardTable = styled.View`
-  padding-top: 5px;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  flex: 1;
-  justify-content: space-between;
-`;
-
 const CardContainer = styled.View`
   padding: 5px;
 `;
@@ -58,7 +50,6 @@ function shuffleCards(array) {
     array[currentIndex] = array[randomIndex];
     array[randomIndex] = temp;
   }
-  console.log(array);
   return array;
 }
 
@@ -79,7 +70,7 @@ export default function Main() {
     setIsCardsDisabled(false);
   };
 
-  // Check if both cards have the same value. If they do, mark them inactive
+  // Check if both cards have the same value. If they do, mark them cleared
   const evaluateCards = () => {
     const [first, second] = openCards;
     enableCards();
@@ -101,7 +92,6 @@ export default function Main() {
       setOpenCards((prev) => [...prev, index]);
       disableCards();
     } else {
-      // If two cards are already open, we cancel timeout set for flipping cards back
       clearTimeout(timeout.current);
       setOpenCards([index]);
     }
@@ -136,9 +126,6 @@ export default function Main() {
   };
 
   const checkGameEnd = () => {
-    console.log("CHECK GAME END");
-    console.log(Object.keys(clearedCards).length);
-    console.log(CARD_PAIRS_VALUE.length);
     if (Object.keys(clearedCards).length === CARD_PAIRS_VALUE.length) {
       Alert.alert(
         "Congratulations!",
@@ -146,6 +133,21 @@ export default function Main() {
         [{ text: "Try another round", onPress: () => resetGame() }]
       );
     }
+  };
+
+  const renderCard = ({ item, index }) => {
+    return (
+      <CardContainer>
+        <Card
+          onPress={handleCardPress}
+          card={item}
+          index={index}
+          isDisabled={isCardsDisabled}
+          isCleared={isCardCleared(item)}
+          isFlipped={isCardFlipped(index)}
+        />
+      </CardContainer>
+    );
   };
 
   return (
@@ -159,22 +161,14 @@ export default function Main() {
         </StepsText>
       </Header>
 
-      <CardTable>
-        {cards.map((card, index) => {
-          return (
-            <CardContainer key={index}>
-              <Card
-                onPress={handleCardPress}
-                card={card}
-                index={index}
-                isDisabled={isCardsDisabled}
-                isCleared={isCardCleared(card)}
-                isFlipped={isCardFlipped(index)}
-              />
-            </CardContainer>
-          );
-        })}
-      </CardTable>
+      <FlatList
+        data={cards}
+        numColumns={3}
+        renderItem={renderCard}
+        keyExtractor={(_, index) => index}
+        showsVerticalScrollIndicator={false}
+        scrollEnabled={false}
+      />
 
       <StatusBar style="auto" />
     </Container>
