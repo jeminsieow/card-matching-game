@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Text, TouchableOpacity, StyleSheet } from "react-native";
 import styled from "styled-components/native";
 import { Card } from "./components";
@@ -56,26 +56,83 @@ function shuffleCards(array) {
   return array;
 }
 
-const handleCardPress = (index) => {
-  // We will handle it later
-  console.log("pressed");
-};
-
 export default function Main() {
   const [cards, setCards] = useState(
     shuffleCards.bind(null, CARD_PAIRS_VALUE.concat(CARD_PAIRS_VALUE))
   );
+  const [openCards, setOpenCards] = useState([]);
+  const [clearedCards, setClearedCards] = useState({});
+  const [isCardsDisabled, setIsCardsDisabled] = useState(false);
+  const [moves, setMoves] = useState(0);
+  const timeout = useRef(null);
+
+  const disableCards = () => {
+    setIsCardsDisabled(true);
+  };
+  const enableCards = () => {
+    setIsCardsDisabled(false);
+  };
+
+  // Check if both cards have the same value. If they do, mark them inactive
+  const evaluateCards = () => {
+    const [first, second] = openCards;
+    enableCards();
+    if (cards[first] === cards[second]) {
+      setClearedCards((prev) => ({ ...prev, [cards[first]]: true }));
+      setOpenCards([]);
+      return;
+    }
+    // Flip cards after a 500ms duration
+    timeout.current = setTimeout(() => {
+      setOpenCards([]);
+    }, 500);
+  };
+
+  const handleCardPress = (index) => {
+    if (openCards.length === 1) {
+      setOpenCards((prev) => [...prev, index]);
+      setMoves((moves) => moves + 1);
+      disableCards();
+    } else {
+      // If two cards are already open, we cancel timeout set for flipping cards back
+      clearTimeout(timeout.current);
+      setOpenCards([index]);
+    }
+  };
+
+  useEffect(() => {
+    if (openCards.length === 2) {
+      setTimeout(evaluateCards, 500);
+    }
+  }, [openCards]);
+
+  useEffect(() => {
+    console.log("openCards: " + openCards);
+    console.log("clearedCards: ");
+    console.log(clearedCards);
+  }, [openCards, clearedCards]);
+
+  const checkIsFlipped = (index) => {
+    return openCards.includes(index);
+  };
+
+  const checkIsInactive = (card) => {
+    return Boolean(clearedCards[card]);
+  };
+
+  const resetGame = () => {
+    setCards(
+      shuffleCards.bind(null, CARD_PAIRS_VALUE.concat(CARD_PAIRS_VALUE))
+    );
+    setClearedCards({});
+    setOpenCards([]);
+    setMoves(0);
+  };
 
   return (
     <Container>
       <Header>
-        <TouchableOpacity
-          onPress={() =>
-            setCards(
-              shuffleCards.bind(null, CARD_PAIRS_VALUE.concat(CARD_PAIRS_VALUE))
-            )
-          }
-        >
+        <TouchableOpacity onPress={resetGame}>
           <RestartButton>Restart</RestartButton>
         </TouchableOpacity>
         <StepsText>STEPS:</StepsText>
@@ -86,7 +143,14 @@ export default function Main() {
           // return <Text key={index}>{card}</Text>;
           return (
             <CardContainer key={index}>
-              <Card onPress={handleCardPress} />
+              <Card
+                onPress={handleCardPress}
+                card={card}
+                index={index}
+                isDisabled={isCardsDisabled}
+                isInactive={checkIsInactive(card)}
+                isFlipped={checkIsFlipped(index)}
+              />
             </CardContainer>
           );
         })}
