@@ -22,22 +22,32 @@ export default function Card({
   card,
   index,
   isDisabled,
-  isInactive,
+  isCleared,
   isFlipped,
 }) {
   const handlePress = () => {
-    !isFlipped && !isDisabled && onPress(index);
+    if (!isCleared && !isDisabled) {
+      onPress(index);
+    }
   };
 
-  return !isInactive ? (
-    <CardContainer onPress={handlePress}>
-      <QuestionMark>?</QuestionMark>
-      <QuestionMark>{card}</QuestionMark>
-    </CardContainer>
-  ) : (
-    <CardContainer onPress={handlePress}>
-      <QuestionMark>flipped</QuestionMark>
-      <QuestionMark>{card}</QuestionMark>
-    </CardContainer>
-  );
+  if (isFlipped) {
+    return (
+      <CardContainer onPress={handlePress} disabled={isDisabled}>
+        <QuestionMark>{card}</QuestionMark>
+      </CardContainer>
+    );
+  } else if (isCleared) {
+    return (
+      <CardContainer disabled={true}>
+        <QuestionMark>{card}</QuestionMark>
+      </CardContainer>
+    );
+  } else {
+    return (
+      <CardContainer onPress={handlePress}>
+        <QuestionMark>?</QuestionMark>
+      </CardContainer>
+    );
+  }
 }

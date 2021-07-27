@@ -23,8 +23,14 @@ const RestartButton = styled.Text`
 `;
 
 const StepsText = styled.Text`
-  font-size: 35px;
+  padding-right: 20px;
+  font-size: 30px;
   color: white;
+`;
+
+const StepsNumber = styled.Text`
+  font-size: 35px;
+  color: #1b98f2;
 `;
 
 const CardTable = styled.View`
@@ -63,7 +69,7 @@ export default function Main() {
   const [openCards, setOpenCards] = useState([]);
   const [clearedCards, setClearedCards] = useState({});
   const [isCardsDisabled, setIsCardsDisabled] = useState(false);
-  const [moves, setMoves] = useState(0);
+  const [steps, setSteps] = useState(0);
   const timeout = useRef(null);
 
   const disableCards = () => {
@@ -89,9 +95,10 @@ export default function Main() {
   };
 
   const handleCardPress = (index) => {
+    setSteps(steps + 1);
+    console.log(index, steps)
     if (openCards.length === 1) {
       setOpenCards((prev) => [...prev, index]);
-      setMoves((moves) => moves + 1);
       disableCards();
     } else {
       // If two cards are already open, we cancel timeout set for flipping cards back
@@ -112,12 +119,12 @@ export default function Main() {
     console.log(clearedCards);
   }, [openCards, clearedCards]);
 
-  const checkIsFlipped = (index) => {
+  const isCardFlipped = (index) => {
     return openCards.includes(index);
   };
 
-  const checkIsInactive = (card) => {
-    return Boolean(clearedCards[card]);
+  const isCardCleared = (card) => {
+    return clearedCards[card];
   };
 
   const resetGame = () => {
@@ -126,7 +133,7 @@ export default function Main() {
     );
     setClearedCards({});
     setOpenCards([]);
-    setMoves(0);
+    setSteps(0);
   };
 
   return (
@@ -135,7 +142,7 @@ export default function Main() {
         <TouchableOpacity onPress={resetGame}>
           <RestartButton>Restart</RestartButton>
         </TouchableOpacity>
-        <StepsText>STEPS:</StepsText>
+        <StepsText>STEPS: <StepsNumber>{steps}</StepsNumber></StepsText>
       </Header>
 
       <CardTable>
@@ -148,8 +155,8 @@ export default function Main() {
                 card={card}
                 index={index}
                 isDisabled={isCardsDisabled}
-                isInactive={checkIsInactive(card)}
-                isFlipped={checkIsFlipped(index)}
+                isCleared={isCardCleared(card)}
+                isFlipped={isCardFlipped(index)}
               />
             </CardContainer>
           );
