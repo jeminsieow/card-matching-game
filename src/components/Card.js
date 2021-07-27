@@ -10,9 +10,18 @@ const CardContainer = styled.TouchableOpacity`
   border-color: #ffffff;
   align-items: center;
   justify-content: center;
+
+  ${({ flipped }) => flipped && `
+    background: #ffffff;
+  `}
 `;
 
-const QuestionMark = styled.Text`
+const FlippedText = styled.Text`
+  font-size: 20px;
+  color: #000000;
+`;
+
+const UnflippedText = styled.Text`
   font-size: 40px;
   color: #ffffff;
 `;
@@ -33,20 +42,20 @@ export default function Card({
 
   if (isFlipped) {
     return (
-      <CardContainer onPress={handlePress} disabled={isDisabled}>
-        <QuestionMark>{card}</QuestionMark>
+      <CardContainer flipped={true} disabled={isDisabled}>
+        <FlippedText>{card}</FlippedText>
       </CardContainer>
     );
   } else if (isCleared) {
     return (
-      <CardContainer disabled={true}>
-        <QuestionMark>{card}</QuestionMark>
+      <CardContainer flipped={true} disabled={true}>
+        <FlippedText>{card}</FlippedText>
       </CardContainer>
     );
   } else {
     return (
       <CardContainer onPress={handlePress}>
-        <QuestionMark>?</QuestionMark>
+        <UnflippedText>?</UnflippedText>
       </CardContainer>
     );
   }
