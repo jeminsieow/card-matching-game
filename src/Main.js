@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect, useRef } from "react";
-import { Text, TouchableOpacity, StyleSheet } from "react-native";
+import { TouchableOpacity, Alert } from "react-native";
 import styled from "styled-components/native";
 import { Card } from "./components";
 
@@ -96,7 +96,7 @@ export default function Main() {
 
   const handleCardPress = (index) => {
     setSteps(steps + 1);
-    console.log(index, steps)
+    console.log(index, steps);
     if (openCards.length === 1) {
       setOpenCards((prev) => [...prev, index]);
       disableCards();
@@ -114,10 +114,8 @@ export default function Main() {
   }, [openCards]);
 
   useEffect(() => {
-    console.log("openCards: " + openCards);
-    console.log("clearedCards: ");
-    console.log(clearedCards);
-  }, [openCards, clearedCards]);
+    checkGameEnd();
+  }, [clearedCards]);
 
   const isCardFlipped = (index) => {
     return openCards.includes(index);
@@ -134,6 +132,20 @@ export default function Main() {
     setClearedCards({});
     setOpenCards([]);
     setSteps(0);
+    setIsCardsDisabled(false);
+  };
+
+  const checkGameEnd = () => {
+    console.log("CHECK GAME END");
+    console.log(Object.keys(clearedCards).length);
+    console.log(CARD_PAIRS_VALUE.length);
+    if (Object.keys(clearedCards).length === CARD_PAIRS_VALUE.length) {
+      Alert.alert(
+        "Congratulations!",
+        `You have won this game in ${steps} steps!`,
+        [{ text: "Try another round", onPress: () => resetGame() }]
+      );
+    }
   };
 
   return (
@@ -142,12 +154,13 @@ export default function Main() {
         <TouchableOpacity onPress={resetGame}>
           <RestartButton>Restart</RestartButton>
         </TouchableOpacity>
-        <StepsText>STEPS: <StepsNumber>{steps}</StepsNumber></StepsText>
+        <StepsText>
+          STEPS: <StepsNumber>{steps}</StepsNumber>
+        </StepsText>
       </Header>
 
       <CardTable>
         {cards.map((card, index) => {
-          // return <Text key={index}>{card}</Text>;
           return (
             <CardContainer key={index}>
               <Card
