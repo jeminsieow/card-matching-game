@@ -1,7 +1,8 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { Text, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity, StyleSheet } from "react-native";
 import styled from "styled-components/native";
+import { Card } from "./components";
 
 const Container = styled.View`
   flex: 1;
@@ -16,6 +17,7 @@ const Header = styled.View`
 `;
 
 const RestartButton = styled.Text`
+  padding-left: 20px;
   font-size: 20px;
   color: #1b98f2;
 `;
@@ -23,6 +25,19 @@ const RestartButton = styled.Text`
 const StepsText = styled.Text`
   font-size: 35px;
   color: white;
+`;
+
+const CardTable = styled.View`
+  padding-top: 5px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  flex: 1;
+  justify-content: space-between;
+`;
+
+const CardContainer = styled.View`
+  padding: 5px;
 `;
 
 const CARD_PAIRS_VALUE = [1, 2, 3, 4, 5, 6];
@@ -40,6 +55,11 @@ function shuffleCards(array) {
   console.log(array);
   return array;
 }
+
+const handleCardPress = (index) => {
+  // We will handle it later
+  console.log("pressed");
+};
 
 export default function Main() {
   const [cards, setCards] = useState(
@@ -61,9 +81,16 @@ export default function Main() {
         <StepsText>STEPS:</StepsText>
       </Header>
 
-      {cards.map((card, i) => {
-        return <Text key={i}>{card}</Text>;
-      })}
+      <CardTable>
+        {cards.map((card, index) => {
+          // return <Text key={index}>{card}</Text>;
+          return (
+            <CardContainer key={index}>
+              <Card onPress={handleCardPress} />
+            </CardContainer>
+          );
+        })}
+      </CardTable>
 
       <StatusBar style="auto" />
     </Container>
