@@ -67,10 +67,10 @@ export default function Main() {
       setOpenCards([]);
       return;
     }
-    // Flip cards after a 500ms duration
+    // Flip cards after 1s
     timeout.current = setTimeout(() => {
       setOpenCards([]);
-    }, 500);
+    }, 1000);
   };
 
   const handleCardPress = (index) => {
@@ -86,7 +86,7 @@ export default function Main() {
 
   useEffect(() => {
     if (openCards.length === 2) {
-      setTimeout(evaluateCards, 500);
+      setTimeout(evaluateCards, 100);
     }
   }, [openCards]);
 
