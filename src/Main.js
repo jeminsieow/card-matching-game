@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { TouchableOpacity, Alert, FlatList } from "react-native";
 import styled from "styled-components/native";
 import { Card } from "./components";
+import { shuffleCards } from "./utilities/helpers";
 
 const Container = styled.View`
   flex: 1;
@@ -40,25 +41,12 @@ const CardContainer = styled.View`
 
 const CARD_PAIRS_VALUE = [1, 2, 3, 4, 5, 6];
 
-// Fisher-Yates shuffle algorithm
-function shuffleCards(array) {
-  const length = array.length;
-  for (let i = length; i > 0; i--) {
-    const randomIndex = Math.floor(Math.random() * i);
-    const currentIndex = i - 1;
-    const temp = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temp;
-  }
-  return array;
-}
-
 export default function Main() {
   const [cards, setCards] = useState(
     shuffleCards.bind(null, CARD_PAIRS_VALUE.concat(CARD_PAIRS_VALUE))
   );
   const [openCards, setOpenCards] = useState([]);
-  const [clearedCards, setClearedCards] = useState({});
+  const [clearedCards, setClearedCards] = useState([]);
   const [isCardsDisabled, setIsCardsDisabled] = useState(false);
   const [steps, setSteps] = useState(0);
   const timeout = useRef(null);
@@ -75,7 +63,7 @@ export default function Main() {
     const [first, second] = openCards;
     enableCards();
     if (cards[first] === cards[second]) {
-      setClearedCards((prev) => ({ ...prev, [cards[first]]: true }));
+      setClearedCards((prev) => ([...prev, cards[first]]))
       setOpenCards([]);
       return;
     }
@@ -87,7 +75,6 @@ export default function Main() {
 
   const handleCardPress = (index) => {
     setSteps(steps + 1);
-    console.log(index, steps);
     if (openCards.length === 1) {
       setOpenCards((prev) => [...prev, index]);
       disableCards();
@@ -112,21 +99,21 @@ export default function Main() {
   };
 
   const isCardCleared = (card) => {
-    return clearedCards[card];
+    return clearedCards.includes(card);
   };
 
   const resetGame = () => {
     setCards(
       shuffleCards.bind(null, CARD_PAIRS_VALUE.concat(CARD_PAIRS_VALUE))
     );
-    setClearedCards({});
+    setClearedCards([]);
     setOpenCards([]);
     setSteps(0);
     setIsCardsDisabled(false);
   };
 
   const checkGameEnd = () => {
-    if (Object.keys(clearedCards).length === CARD_PAIRS_VALUE.length) {
+    if (clearedCards.length === CARD_PAIRS_VALUE.length) {
       Alert.alert(
         "Congratulations!",
         `You have won this game in ${steps} steps!`,
