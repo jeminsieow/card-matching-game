@@ -1,45 +1,16 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect, useRef } from "react";
-import { TouchableOpacity, Alert, FlatList } from "react-native";
+import { Alert, FlatList } from "react-native";
 import styled from "styled-components/native";
-import { Card } from "./components";
+import { Card, Header } from "./components";
 import { shuffleCards, getRandomNumbers } from "./utilities/functions";
-import { COLOR_BLUE, COLOR_DARK_GREY, COLOR_WHITE, HEADER_HEIGHT } from "./utilities/constants";
+import { COLOR_DARK_GREY } from "./utilities/constants";
 
 const Container = styled.View`
   flex: 1;
   background-color: ${COLOR_DARK_GREY};
   padding: 20px;
-`;
-
-const Header = styled.View`
-  height: ${HEADER_HEIGHT}px;
-  padding-bottom: 5px;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-end;
-`;
-
-const RestartButton = styled.Text`
-  padding-left: 20px;
-  padding-bottom: 5px;
-  font-size: 20px;
-  color: ${COLOR_BLUE};
-`;
-
-const StepsText = styled.Text`
-  padding-right: 20px;
-  font-size: 30px;
-  color: ${COLOR_WHITE};
-`;
-
-const StepsNumber = styled.Text`
-  font-size: 35px;
-  color: ${COLOR_BLUE};
-`;
-
-const CardContainer = styled.View`
-  padding: 5px;
+  align-items: center;
 `;
 
 const CARD_PAIRS_VALUE = getRandomNumbers();
@@ -67,11 +38,11 @@ export default function Main() {
     const [first, second] = openCards;
     enableCards();
     if (cards[first] === cards[second]) {
-      setClearedCards((prev) => ([...prev, cards[first]]))
+      setClearedCards((prev) => [...prev, cards[first]]);
       setOpenCards([]);
       return;
     }
-    // Flip cards after 1s
+    // Flip cards after 1 second
     timeout.current = setTimeout(() => {
       setOpenCards([]);
     }, 1000);
@@ -119,16 +90,14 @@ export default function Main() {
 
   const renderCard = ({ item, index }) => {
     return (
-      <CardContainer>
-        <Card
-          onPress={handleCardPress}
-          card={item}
-          index={index}
-          isDisabled={isCardsDisabled}
-          isCleared={isCardCleared(item)}
-          isFlipped={isCardFlipped(index)}
-        />
-      </CardContainer>
+      <Card
+        onPress={handleCardPress}
+        card={item}
+        index={index}
+        isDisabled={isCardsDisabled}
+        isCleared={isCardCleared(item)}
+        isFlipped={isCardFlipped(index)}
+      />
     );
   };
 
@@ -144,15 +113,7 @@ export default function Main() {
 
   return (
     <Container>
-      <Header>
-        <TouchableOpacity onPress={resetGame}>
-          <RestartButton>Restart</RestartButton>
-        </TouchableOpacity>
-        <StepsText>
-          STEPS: <StepsNumber>{steps}</StepsNumber>
-        </StepsText>
-      </Header>
-
+      <Header onPressResetGame={resetGame} steps={steps} />
       <FlatList
         data={cards}
         numColumns={3}
@@ -161,7 +122,6 @@ export default function Main() {
         showsVerticalScrollIndicator={false}
         scrollEnabled={false}
       />
-
       <StatusBar style="auto" />
     </Container>
   );

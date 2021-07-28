@@ -85,13 +85,13 @@ export default function Card({
   };
 
   return isCleared ? (
-    <View>
+    <View style={styles.container}>
       <Animated.View style={[styles.card, styles.frontCard]}>
         <FrontText flipped={true}>{card}</FrontText>
       </Animated.View>
     </View>
   ) : (
-    <View>
+    <View style={styles.container}>
       <Animated.View
         style={[frontAnimatedStyle, styles.card, styles.frontCard]}
       >
@@ -110,9 +110,7 @@ export default function Card({
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    margin: 5,
   },
   card: {
     width: CARD_WIDTH,
