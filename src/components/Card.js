@@ -1,21 +1,18 @@
 import React, { useEffect, useRef } from "react";
 import { View, Animated, StyleSheet, TouchableOpacity } from "react-native";
 import styled from "styled-components";
+import { COLOR_BLUE, COLOR_DARK_GREY, COLOR_WHITE, COLOR_BLACK } from "../utilities/constants";
 
-const FlippedText = styled.Text`
+const FrontText = styled.Text`
   font-size: 20px;
-  color: #000000;
+  color: ${COLOR_BLACK};
 
-  ${({ flipped }) =>
-    !flipped &&
-    `
-    color: #ffffff;
-  `}
+  ${({ flipped }) => !flipped && `color:${COLOR_WHITE};`}
 `;
 
-const UnflippedText = styled.Text`
+const BackText = styled.Text`
   font-size: 40px;
-  color: #ffffff;
+  color: ${COLOR_WHITE};
 `;
 
 const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
@@ -70,8 +67,6 @@ export default function Card({
   }, [isFlipped, isCleared]);
 
   const flipCard = () => {
-    console.log("isflipped: " + isFlipped);
-    console.log("iscleared: " + isCleared);
     if (!isFlipped && !isCleared) {
       Animated.spring(animatedValue, {
         toValue: 180,
@@ -89,29 +84,25 @@ export default function Card({
     }
   };
 
-  if (isCleared) {
-    return (
-      <View>
-        <Animated.View style={[styles.card, styles.frontCard]}>
-          <FlippedText flipped={!isFlipped}>{card}</FlippedText>
-        </Animated.View>
-      </View>
-    );
-  }
-
-  return (
+  return isCleared ? (
+    <View>
+      <Animated.View style={[styles.card, styles.frontCard]}>
+        <FrontText flipped={true}>{card}</FrontText>
+      </Animated.View>
+    </View>
+  ) : (
     <View>
       <Animated.View
         style={[frontAnimatedStyle, styles.card, styles.frontCard]}
       >
-        <FlippedText flipped={isFlipped}>{card}</FlippedText>
+        <FrontText flipped={isFlipped}>{card}</FrontText>
       </Animated.View>
       <AnimatedTouchable
         style={[backAnimatedStyle, styles.card, styles.backCard]}
         onPress={() => handlePress()}
         disabled={isDisabled || isFlipped}
       >
-        <UnflippedText>? {card}</UnflippedText>
+        <BackText>?</BackText>
       </AnimatedTouchable>
     </View>
   );
@@ -128,16 +119,16 @@ const styles = StyleSheet.create({
     height: 140,
     borderRadius: 10,
     borderWidth: 3,
-    borderColor: "#FFFFFF",
+    borderColor: COLOR_WHITE,
     alignItems: "center",
     justifyContent: "center",
   },
   frontCard: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: COLOR_WHITE,
     backfaceVisibility: "hidden",
   },
   backCard: {
-    backgroundColor: "#1b98f2",
+    backgroundColor: COLOR_BLUE,
     position: "absolute",
   },
 });

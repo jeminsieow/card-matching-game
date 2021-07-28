@@ -4,10 +4,11 @@ import { TouchableOpacity, Alert, FlatList } from "react-native";
 import styled from "styled-components/native";
 import { Card } from "./components";
 import { shuffleCards, getRandomNumbers } from "./utilities/functions";
+import { COLOR_BLUE, COLOR_DARK_GREY, COLOR_WHITE } from "./utilities/constants";
 
 const Container = styled.View`
   flex: 1;
-  background-color: #39353c;
+  background-color: ${COLOR_DARK_GREY};
   padding: 20px;
 `;
 
@@ -21,18 +22,18 @@ const Header = styled.View`
 const RestartButton = styled.Text`
   padding-left: 20px;
   font-size: 20px;
-  color: #1b98f2;
+  color: ${COLOR_BLUE};
 `;
 
 const StepsText = styled.Text`
   padding-right: 20px;
   font-size: 30px;
-  color: white;
+  color: ${COLOR_WHITE};
 `;
 
 const StepsNumber = styled.Text`
   font-size: 35px;
-  color: #1b98f2;
+  color: ${COLOR_BLUE};
 `;
 
 const CardContainer = styled.View`
@@ -51,6 +52,7 @@ export default function Main() {
   const [steps, setSteps] = useState(0);
   const timeout = useRef(null);
 
+  // Prevent user from pressing more than 2 cards
   const disableCards = () => {
     setIsCardsDisabled(true);
   };
@@ -84,16 +86,6 @@ export default function Main() {
     }
   };
 
-  useEffect(() => {
-    if (openCards.length === 2) {
-      setTimeout(evaluateCards, 100);
-    }
-  }, [openCards]);
-
-  useEffect(() => {
-    checkGameEnd();
-  }, [clearedCards]);
-
   const isCardFlipped = (index) => {
     return openCards.includes(index);
   };
@@ -102,6 +94,7 @@ export default function Main() {
     return clearedCards.includes(card);
   };
 
+  // Get a new array of numbers, and shuffle the array
   const resetGame = () => {
     setCards(
       shuffleCards.bind(null, CARD_PAIRS_VALUE.concat(CARD_PAIRS_VALUE))
@@ -136,6 +129,16 @@ export default function Main() {
       </CardContainer>
     );
   };
+
+  useEffect(() => {
+    if (openCards.length === 2) {
+      setTimeout(evaluateCards, 100);
+    }
+  }, [openCards]);
+
+  useEffect(() => {
+    checkGameEnd();
+  }, [clearedCards]);
 
   return (
     <Container>
