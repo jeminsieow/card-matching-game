@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { TouchableOpacity, Alert, FlatList } from "react-native";
 import styled from "styled-components/native";
 import { Card } from "./components";
-import { shuffleCards } from "./utilities/helpers";
+import { shuffleCards, getRandomNumbers } from "./utilities/functions";
 
 const Container = styled.View`
   flex: 1;
@@ -39,7 +39,7 @@ const CardContainer = styled.View`
   padding: 5px;
 `;
 
-const CARD_PAIRS_VALUE = [1, 2, 3, 4, 5, 6];
+const CARD_PAIRS_VALUE = getRandomNumbers();
 
 export default function Main() {
   const [cards, setCards] = useState(

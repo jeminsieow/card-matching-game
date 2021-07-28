@@ -10,3 +10,14 @@ export function shuffleCards(array) {
   }
   return array;
 }
+
+export function getRandomNumbers() {
+  const arr = [];
+  while (arr.length < 6) {
+    let num = Math.floor(Math.random() * 100) + 1;
+    if (arr.indexOf(num) === -1) {
+      arr.push(num);
+    }
+  }
+  return arr;
+}
