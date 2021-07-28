@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { View, Animated, StyleSheet, TouchableOpacity } from "react-native";
 import styled from "styled-components";
-import { COLOR_BLUE, COLOR_DARK_GREY, COLOR_WHITE, COLOR_BLACK } from "../utilities/constants";
+import { COLOR_BLUE, COLOR_WHITE, COLOR_BLACK, CARD_WIDTH, CARD_HEIGHT } from "../utilities/constants";
 
 const FrontText = styled.Text`
   font-size: 20px;
@@ -115,8 +115,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   card: {
-    width: 95,
-    height: 140,
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
     borderRadius: 10,
     borderWidth: 3,
     borderColor: COLOR_WHITE,

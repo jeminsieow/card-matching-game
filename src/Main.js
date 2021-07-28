@@ -4,7 +4,7 @@ import { TouchableOpacity, Alert, FlatList } from "react-native";
 import styled from "styled-components/native";
 import { Card } from "./components";
 import { shuffleCards, getRandomNumbers } from "./utilities/functions";
-import { COLOR_BLUE, COLOR_DARK_GREY, COLOR_WHITE } from "./utilities/constants";
+import { COLOR_BLUE, COLOR_DARK_GREY, COLOR_WHITE, HEADER_HEIGHT } from "./utilities/constants";
 
 const Container = styled.View`
   flex: 1;
@@ -13,14 +13,16 @@ const Container = styled.View`
 `;
 
 const Header = styled.View`
-  padding-top: 50px;
+  height: ${HEADER_HEIGHT}px;
   padding-bottom: 5px;
   flex-direction: row;
   justify-content: space-between;
+  align-items: flex-end;
 `;
 
 const RestartButton = styled.Text`
   padding-left: 20px;
+  padding-bottom: 5px;
   font-size: 20px;
   color: ${COLOR_BLUE};
 `;
