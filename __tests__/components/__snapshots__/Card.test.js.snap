@@ -1,0 +1,311 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Cleared card renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "margin": 5,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backfaceVisibility": "hidden",
+        "backgroundColor": "#FFFFFF",
+        "borderColor": "#FFFFFF",
+        "borderRadius": 10,
+        "borderWidth": 3,
+        "height": 275,
+        "justifyContent": "center",
+        "width": 226,
+      }
+    }
+  >
+    <Text
+      flipped={true}
+      style={
+        Array [
+          Object {
+            "color": "#000000",
+            "fontSize": 20,
+          },
+        ]
+      }
+    >
+      1
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Disabled card renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "margin": 5,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backfaceVisibility": "hidden",
+        "backgroundColor": "#FFFFFF",
+        "borderColor": "#FFFFFF",
+        "borderRadius": 10,
+        "borderWidth": 3,
+        "height": 275,
+        "justifyContent": "center",
+        "opacity": -90,
+        "transform": Array [
+          Object {
+            "rotateY": "180deg",
+          },
+        ],
+        "width": 226,
+      }
+    }
+  >
+    <Text
+      flipped={false}
+      style={
+        Array [
+          Object {
+            "color": "#FFFFFF",
+            "fontSize": 20,
+          },
+        ]
+      }
+    >
+      1
+    </Text>
+  </View>
+  <View
+    accessible={true}
+    focusable={true}
+    forwardedRef={[Function]}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#1B98F2",
+        "borderColor": "#FFFFFF",
+        "borderRadius": 10,
+        "borderWidth": 3,
+        "height": 275,
+        "justifyContent": "center",
+        "opacity": 91,
+        "position": "absolute",
+        "transform": Array [
+          Object {
+            "rotateY": "360deg",
+          },
+        ],
+        "width": 226,
+      }
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#FFFFFF",
+            "fontSize": 40,
+          },
+        ]
+      }
+    >
+      ?
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Flipped card renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "margin": 5,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backfaceVisibility": "hidden",
+        "backgroundColor": "#FFFFFF",
+        "borderColor": "#FFFFFF",
+        "borderRadius": 10,
+        "borderWidth": 3,
+        "height": 275,
+        "justifyContent": "center",
+        "opacity": -90,
+        "transform": Array [
+          Object {
+            "rotateY": "180deg",
+          },
+        ],
+        "width": 226,
+      }
+    }
+  >
+    <Text
+      flipped={true}
+      style={
+        Array [
+          Object {
+            "color": "#000000",
+            "fontSize": 20,
+          },
+        ]
+      }
+    >
+      1
+    </Text>
+  </View>
+  <View
+    accessible={true}
+    focusable={true}
+    forwardedRef={[Function]}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#1B98F2",
+        "borderColor": "#FFFFFF",
+        "borderRadius": 10,
+        "borderWidth": 3,
+        "height": 275,
+        "justifyContent": "center",
+        "opacity": 91,
+        "position": "absolute",
+        "transform": Array [
+          Object {
+            "rotateY": "360deg",
+          },
+        ],
+        "width": 226,
+      }
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#FFFFFF",
+            "fontSize": 40,
+          },
+        ]
+      }
+    >
+      ?
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Unflipped card renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "margin": 5,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backfaceVisibility": "hidden",
+        "backgroundColor": "#FFFFFF",
+        "borderColor": "#FFFFFF",
+        "borderRadius": 10,
+        "borderWidth": 3,
+        "height": 275,
+        "justifyContent": "center",
+        "opacity": -90,
+        "transform": Array [
+          Object {
+            "rotateY": "180deg",
+          },
+        ],
+        "width": 226,
+      }
+    }
+  >
+    <Text
+      flipped={false}
+      style={
+        Array [
+          Object {
+            "color": "#FFFFFF",
+            "fontSize": 20,
+          },
+        ]
+      }
+    >
+      1
+    </Text>
+  </View>
+  <View
+    accessible={true}
+    focusable={true}
+    forwardedRef={[Function]}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#1B98F2",
+        "borderColor": "#FFFFFF",
+        "borderRadius": 10,
+        "borderWidth": 3,
+        "height": 275,
+        "justifyContent": "center",
+        "opacity": 91,
+        "position": "absolute",
+        "transform": Array [
+          Object {
+            "rotateY": "360deg",
+          },
+        ],
+        "width": 226,
+      }
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#FFFFFF",
+            "fontSize": 40,
+          },
+        ]
+      }
+    >
+      ?
+    </Text>
+  </View>
+</View>
+`;
