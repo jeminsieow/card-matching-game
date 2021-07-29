@@ -2,9 +2,9 @@ import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect, useRef } from "react";
 import { Alert, FlatList } from "react-native";
 import styled from "styled-components/native";
-import { Card, Header } from "./components";
-import { shuffleCards, getRandomNumbers } from "./utilities/functions";
-import { COLOR_DARK_GREY } from "./utilities/constants";
+import { Card, Header } from "../components";
+import { shuffleCards, getRandomNumbers } from "../utilities/functions";
+import { COLOR_DARK_GREY } from "../utilities/constants";
 
 const Container = styled.View`
   flex: 1;

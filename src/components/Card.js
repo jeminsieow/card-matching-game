@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { View, Animated, StyleSheet, TouchableOpacity } from "react-native";
-import styled from "styled-components";
+import styled from "styled-components/native";
 import { COLOR_BLUE, COLOR_WHITE, COLOR_BLACK, CARD_WIDTH, CARD_HEIGHT } from "../utilities/constants";
 
 const FrontText = styled.Text`
