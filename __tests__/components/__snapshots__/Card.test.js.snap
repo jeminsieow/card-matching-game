@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Cleared card renders correctly 1`] = `
+exports[`Card component cleared card renders correctly 1`] = `
 <View
   style={
     Object {
@@ -40,7 +40,7 @@ exports[`Cleared card renders correctly 1`] = `
 </View>
 `;
 
-exports[`Disabled card renders correctly 1`] = `
+exports[`Card component disabled card renders correctly 1`] = `
 <View
   style={
     Object {
@@ -113,6 +113,7 @@ exports[`Disabled card renders correctly 1`] = `
         "width": 226,
       }
     }
+    testID="touchableCard"
   >
     <Text
       style={
@@ -130,7 +131,7 @@ exports[`Disabled card renders correctly 1`] = `
 </View>
 `;
 
-exports[`Flipped card renders correctly 1`] = `
+exports[`Card component flipped card renders correctly 1`] = `
 <View
   style={
     Object {
@@ -203,6 +204,7 @@ exports[`Flipped card renders correctly 1`] = `
         "width": 226,
       }
     }
+    testID="touchableCard"
   >
     <Text
       style={
@@ -220,7 +222,7 @@ exports[`Flipped card renders correctly 1`] = `
 </View>
 `;
 
-exports[`Unflipped card renders correctly 1`] = `
+exports[`Card component unflipped card renders correctly 1`] = `
 <View
   style={
     Object {
@@ -293,6 +295,7 @@ exports[`Unflipped card renders correctly 1`] = `
         "width": 226,
       }
     }
+    testID="touchableCard"
   >
     <Text
       style={

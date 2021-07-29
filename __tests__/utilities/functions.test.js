@@ -1,6 +1,6 @@
 import { shuffleCards, getRandomNumbers } from "../../src/utilities/functions"
 
-test('shuffle cards', () => {
+it('shuffle cards', () => {
   const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const arr2 = shuffleCards([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
   let isSameOrder = true;
@@ -13,7 +13,7 @@ test('shuffle cards', () => {
   expect(isSameOrder).toBe(false);
 });
 
-test('get random numbers between 1 - 100', () => {
+it('get random numbers between 1 - 100', () => {
   const arr = getRandomNumbers();
   let isInRange = true;
 

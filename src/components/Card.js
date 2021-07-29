@@ -98,6 +98,7 @@ export default function Card({
         <FrontText flipped={isFlipped}>{card}</FrontText>
       </Animated.View>
       <AnimatedTouchable
+        testID="touchableCard"
         style={[backAnimatedStyle, styles.card, styles.backCard]}
         onPress={() => handlePress()}
         disabled={isDisabled || isFlipped}

@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect, useRef } from "react";
-import { Alert, FlatList } from "react-native";
+import { Alert, FlatList, Button } from "react-native";
 import styled from "styled-components/native";
 import { Card, Header } from "../components";
 import { shuffleCards, getRandomNumbers } from "../utilities/functions";

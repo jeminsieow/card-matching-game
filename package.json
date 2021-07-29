@@ -20,11 +20,25 @@
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@types/jest": "^26.0.24",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "enzyme-react-16-adapter-setup": "^0.1.0",
+    "jest-enzyme": "^7.1.2",
     "jest-expo": "^42.1.0",
     "react-test-renderer": "^17.0.2"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/coverage/**",
+      "!**/node_modules/**",
+      "!**/babel.config.js",
+      "!**/jest.setup.js"
+    ],
+    "setupFilesAfterEnv": ["./node_modules/jest-enzyme/lib/index.js"],
+    "setupFiles": ["enzyme-react-16-adapter-setup"]
   },
   "private": true
 }
