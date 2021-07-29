@@ -1,7 +1,6 @@
 import React from "react";
 import { create } from "react-test-renderer";
 import Main from "../../src/screens/Main";
-import {shuffleCards, getRandomNumbers} from '../../src/utilities/functions'
 
 jest.useFakeTimers()
 jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
