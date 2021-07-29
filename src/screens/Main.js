@@ -4,7 +4,7 @@ import { Alert, FlatList } from "react-native";
 import styled from "styled-components/native";
 import { Card, Header } from "../components";
 import { shuffleCards, getRandomNumbers } from "../utilities/functions";
-import { COLOR_DARK_GREY } from "../utilities/constants";
+import { CARD_PAIRS_VALUE, COLOR_DARK_GREY } from "../utilities/constants";
 
 const Container = styled.View`
   flex: 1;
@@ -13,18 +13,13 @@ const Container = styled.View`
   align-items: center;
 `;
 
-const CARD_PAIRS_VALUE = getRandomNumbers();
-
 export default function Main() {
-  const [cards, setCards] = useState(
-    shuffleCards.bind(null, CARD_PAIRS_VALUE.concat(CARD_PAIRS_VALUE))
-  );
+  const [cards, setCards] = useState(CARD_PAIRS_VALUE)
   const [openCards, setOpenCards] = useState([]);
   const [clearedCards, setClearedCards] = useState([]);
   const [isCardsDisabled, setIsCardsDisabled] = useState(false);
   const [steps, setSteps] = useState(0);
   const timeout = useRef(null);
-
   // Prevent user from pressing more than 2 cards
   const disableCards = () => {
     setIsCardsDisabled(true);
@@ -69,9 +64,7 @@ export default function Main() {
 
   // Get a new array of numbers, and shuffle the array
   const resetGame = () => {
-    setCards(
-      shuffleCards.bind(null, CARD_PAIRS_VALUE.concat(CARD_PAIRS_VALUE))
-    );
+    setCards(shuffleCards(getRandomNumbers()));
     setClearedCards([]);
     setOpenCards([]);
     setSteps(0);
@@ -79,7 +72,7 @@ export default function Main() {
   };
 
   const checkGameEnd = () => {
-    if (clearedCards.length === CARD_PAIRS_VALUE.length) {
+    if (clearedCards.length === CARD_PAIRS_VALUE.length / 2) {
       Alert.alert(
         "Congratulations!",
         `You have won this game in ${steps} steps!`,
