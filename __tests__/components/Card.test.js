@@ -74,9 +74,9 @@ describe("Card component", () => {
         isCleared={false}
         isFlipped={false}
       />
-    )
+    );
     const card = wrapper.find({ testID: "touchableCard" });
-    card.simulate('press');
+    card.simulate("press");
     expect(mockFunc).toHaveBeenCalled();
   });
 });

@@ -14,24 +14,17 @@ const Container = styled.View`
 `;
 
 export default function Main() {
-  const [cards, setCards] = useState(CARD_PAIRS_VALUE)
+  const [cards, setCards] = useState(CARD_PAIRS_VALUE);
   const [openCards, setOpenCards] = useState([]);
   const [clearedCards, setClearedCards] = useState([]);
   const [isCardsDisabled, setIsCardsDisabled] = useState(false);
   const [steps, setSteps] = useState(0);
   const timeout = useRef(null);
-  // Prevent user from pressing more than 2 cards
-  const disableCards = () => {
-    setIsCardsDisabled(true);
-  };
-  const enableCards = () => {
-    setIsCardsDisabled(false);
-  };
 
   // Check if both cards have the same value. If they do, mark them cleared
   const evaluateCards = () => {
     const [first, second] = openCards;
-    enableCards();
+    setIsCardsDisabled(false);
     if (cards[first] === cards[second]) {
       setClearedCards((prev) => [...prev, cards[first]]);
       setOpenCards([]);
@@ -47,7 +40,7 @@ export default function Main() {
     setSteps(steps + 1);
     if (openCards.length === 1) {
       setOpenCards((prev) => [...prev, index]);
-      disableCards();
+      setIsCardsDisabled(true);
     } else {
       clearTimeout(timeout.current);
       setOpenCards([index]);

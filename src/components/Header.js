@@ -1,7 +1,12 @@
 import React from "react";
 import { TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
-import { COLOR_BLUE, COLOR_WHITE, HEADER_HEIGHT, HEADER_WIDTH } from "../utilities/constants";
+import {
+  COLOR_BLUE,
+  COLOR_WHITE,
+  HEADER_HEIGHT,
+  HEADER_WIDTH,
+} from "../utilities/constants";
 
 const HeaderContainer = styled.View`
   height: ${HEADER_HEIGHT}px;
@@ -36,7 +41,9 @@ export default function Header({ onPressResetGame, steps }) {
       <TouchableOpacity onPress={onPressResetGame}>
         <RestartButton>Restart</RestartButton>
       </TouchableOpacity>
-      <StepsText>STEPS: <StepsNumber>{steps}</StepsNumber></StepsText>
+      <StepsText>
+        STEPS: <StepsNumber>{steps}</StepsNumber>
+      </StepsText>
     </HeaderContainer>
   );
 }
