@@ -1,8 +1,4 @@
 # Card Matching Game
-
-Singtel Senior Software Engineer Assignment
-</br>
-</br>
 Video demo: https://user-images.githubusercontent.com/26967037/127629932-80f172a9-cc46-4199-afee-47af3f3b4f6c.mp4
 
 ## Overview
